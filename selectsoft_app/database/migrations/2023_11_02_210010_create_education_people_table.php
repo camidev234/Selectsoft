@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('education_people', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('person_id');
+            $table->string('shcool_name', 100);
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('studyLevel_id');
+            $table->foreign('person_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('study_statuses');
+            $table->foreign('studyLevel_id')->references('id')->on('study_levels');
             $table->timestamps();
         });
     }
