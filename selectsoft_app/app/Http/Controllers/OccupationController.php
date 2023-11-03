@@ -20,15 +20,23 @@ class OccupationController extends Controller
      */
     public function create()
     {
-        //
+        return view('/occupation/create_occupation');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $datos)
     {
-        //
+        $new1=new Occupation();
+
+        $new1->occupation_code=$datos->occupation_code;
+        $new1->occupation_name=$datos->occupation_name;
+        $new1->description=$datos->description;
+
+        $new1->save();
+
+        return redirect()->route('create_occupation');
     }
 
     /**

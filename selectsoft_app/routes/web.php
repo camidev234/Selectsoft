@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OccupationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('create_occupation',[OccupationController::class,'create'])->name('create_occupation');
+Route::post('save_occupation',[OccupationController::class,'store'])->name('save_occupation');   
