@@ -27,7 +27,7 @@
                     <form action="">
                         <button class="deleteBtn">Eliminar</button>
                     </form>
-                    <form action="">
+                    <form action="{{route('occupations.edit',['occupation'=>$occupation->id])}}" method="get">
                         <button class="updateBtn">Actualizar</button>
                     </form>
                 </td>

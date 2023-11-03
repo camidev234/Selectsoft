@@ -54,17 +54,27 @@ class OccupationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Occupation $occupation)
+    public function edit($occupation)
     {
-        //
+        $occupation1=Occupation::find($occupation);
+        return view('/occupation/updateOccupation',[
+            'occupation' => $occupation1
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Occupation $occupation)
+    public function update(Request $request,$occupation)
     {
-        //
+        $occupation1=Occupation::findOrFail($occupation);
+        $occupation1->occupation_code=$request->occupation_code;
+        $occupation1->occupation_name=$request->occupation_name;
+        $occupation1->description=$request->description;
+
+        $occupation1->save();
+
+        return redirect()->route('occupations.index');
     }
 
     /**

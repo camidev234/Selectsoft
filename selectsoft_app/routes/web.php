@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('create_occupation',[OccupationController::class,'create'])->name('create_occupation');
 Route::post('save_occupation',[OccupationController::class,'store'])->name('save_occupation');
-Route::get('/',[OccupationController::class, 'index'])->name('occupations.index');   
+Route::get('/',[OccupationController::class, 'index'])->name('occupations.index');
+Route::get('/updateOccupation/{occupation}',[OccupationController::class, 'edit'])->name('occupations.edit');
+Route::put('/occupations/{id}',[OccupationController::class, 'update'])->name('update_occupation');
