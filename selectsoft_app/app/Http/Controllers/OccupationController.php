@@ -12,7 +12,11 @@ class OccupationController extends Controller
      */
     public function index()
     {
-        //
+        $allOccupations = Occupation::all();
+
+        return view('/occupation/indexOccupation', [
+            'allOccupations' => $allOccupations
+        ]);
     }
 
     /**
@@ -36,7 +40,7 @@ class OccupationController extends Controller
 
         $new1->save();
 
-        return redirect()->route('create_occupation');
+        return redirect()->route('occupations.index');
     }
 
     /**

@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('create_occupation',[OccupationController::class,'create'])->name('create_occupation');
-Route::post('save_occupation',[OccupationController::class,'store'])->name('save_occupation');   
+Route::post('save_occupation',[OccupationController::class,'store'])->name('save_occupation');
+Route::get('/',[OccupationController::class, 'index'])->name('occupations.index');   
