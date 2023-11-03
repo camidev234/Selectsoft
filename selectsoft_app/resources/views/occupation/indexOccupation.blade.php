@@ -24,7 +24,9 @@
                 <td>{{ $occupation->occupation_name }}</td>
                 <td>{{ $occupation->description }}</td>
                 <td class="actions">
-                    <form action="">
+                    <form action="{{route('delete_occupation',['id'=>$occupation->id])}}" method="post" >
+                        @csrf
+                        @method('DELETE')
                         <button class="deleteBtn">Eliminar</button>
                     </form>
                     <form action="{{route('occupations.edit',['occupation'=>$occupation->id])}}" method="get">

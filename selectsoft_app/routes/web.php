@@ -19,3 +19,4 @@ Route::post('save_occupation',[OccupationController::class,'store'])->name('save
 Route::get('/',[OccupationController::class, 'index'])->name('occupations.index');
 Route::get('/updateOccupation/{occupation}',[OccupationController::class, 'edit'])->name('occupations.edit');
 Route::put('/occupations/{id}',[OccupationController::class, 'update'])->name('update_occupation');
+Route::delete('/occupations/deleteoccupation/{id}',[OccupationController::class, 'destroy'])->name('delete_occupation');
