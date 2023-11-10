@@ -54,11 +54,11 @@ class OccupationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($occupation)
+    public function edit(Occupation $occupation)
     {
-        $occupation1=Occupation::find($occupation);
+    
         return view('/occupation/updateOccupation',[
-            'occupation' => $occupation1
+            'occupation' => $occupation
         ]);
     }
 
