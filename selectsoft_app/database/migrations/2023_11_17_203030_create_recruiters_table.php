@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('recruiters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('document_type_id')->references('id')->on('document_types')->onDelete('cascade');
+            $table->string('document_number',15);
+            $table->string('names',100);
+            $table->string('surnames',4100);
             $table->timestamps();
         });
     }
