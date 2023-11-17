@@ -80,8 +80,10 @@ class OccupationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Occupation $occupation)
+    public function destroy($occupation)
     {
-        //
+        $occupation_delete=Occupation::findOrFail($occupation);
+        $occupation_delete->delete();
+        return redirect()->route('occupations.index');
     }
 }
