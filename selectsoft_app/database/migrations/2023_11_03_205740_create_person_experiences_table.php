@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use League\CommonMark\Reference\Reference;
 
 return new class extends Migration
 {
@@ -12,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('candidate_supports', function (Blueprint $table) {
+        Schema::create('person_experiences', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->foreignId('person_id')->references('id')->on('users');
-            $table->foreignId('support_type_id')->references('id')->on('support_types');
-            $table->string('support_file',100);
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('company_experiences',80);
+            $table->string('months_experience',45);
             $table->foreignId('candidates_id')->references('id')->on('candidates');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidate_supports');
+        Schema::dropIfExists('person_experiences');
     }
 };

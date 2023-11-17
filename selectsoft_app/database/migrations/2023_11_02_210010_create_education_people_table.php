@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('person_id')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('study_statuses');
             $table->foreign('studyLevel_id')->references('id')->on('study_levels');
+            $table->foreignId('candidates_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }
