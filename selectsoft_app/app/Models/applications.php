@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class applications extends Model
 {
     use HasFactory;
+
+    public function status() {
+        return $this->belongsTo(Status_aplications::class, 'statusApplications_id', 'id');
+    }
 }

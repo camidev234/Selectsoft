@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Status_aplications extends Model
 {
     use HasFactory;
+
+    public function aplications() {
+        return $this->hasMany(applications::class, 'statusApplications_id', 'id');                                                                              
+    }
 }
