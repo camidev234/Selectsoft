@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('salaries_types', function (Blueprint $table) {
             $table->id();
-            $table->string('country_name');
-            $table->string('country_code')->unique();
+            $table->string('salary_type');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('salaries_types');
     }
 };

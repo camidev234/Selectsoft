@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('job_id')->references('id')->on('charges');
             $table->string('schedule',80);
             $table->foreignId('workDays_id')->references('id')->on('workdays');
-            $table->foreignId('salariesType_id')->references('id')->on('salaries_type');
+            $table->foreignId('salariesType_id')->references('id')->on('salaries_types');
             $table->string('applicant person');
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->string('annotations',100)->nullable();
