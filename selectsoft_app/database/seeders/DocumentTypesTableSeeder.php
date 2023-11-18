@@ -44,7 +44,5 @@ class DocumentTypesTableSeeder extends Seeder
 
         $documentType->document_type = "Permiso por Proteccion Temporal";
         $documentType->save();
-
-
     }
 }
