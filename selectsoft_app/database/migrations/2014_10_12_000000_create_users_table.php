@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_document_type');
+            $table->foreignId('document_type_id')->references('id')->on('document_types');
             $table->string('number_document');
             $table->string('telephone');
             $table->string('phone_number');
