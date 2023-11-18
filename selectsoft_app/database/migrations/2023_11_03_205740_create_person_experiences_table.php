@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('person_experiences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('company_experiences',80);
             $table->string('months_experience',45);
-            $table->foreignId('candidates_id')->references('id')->on('candidates');
+            $table->foreignId('candidate_id')->references('id')->on('candidates');
             $table->timestamps();
         });
     }
