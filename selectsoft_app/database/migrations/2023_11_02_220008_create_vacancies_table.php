@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->string('skills',350);
             $table->string('competencies',350);
             $table->unsignedBigInteger('required experience');
             $table->string('salary range',45);
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->string('schedule',80);
             $table->foreignId('workDays_id')->references('id')->on('workdays');
             $table->foreignId('salariesType_id')->references('id')->on('salaries_types');
-            $table->string('applicant person');
+            $table->string('applicant_person');
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->string('annotations',100)->nullable();
             $table->timestamps();

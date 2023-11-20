@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('person_experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('company_experiences',80);
+            $table->string('company_experience',80);
             $table->string('months_experience',45);
             $table->foreignId('candidate_id')->references('id')->on('candidates');
             $table->timestamps();

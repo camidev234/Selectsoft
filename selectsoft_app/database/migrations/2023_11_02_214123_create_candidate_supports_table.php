@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('person_id')->references('id')->on('users');
             $table->foreignId('support_type_id')->references('id')->on('support_types');
             $table->string('support_file',100);
-            $table->foreignId('candidates_id')->references('id')->on('candidates');
+            $table->foreignId('candidate_id')->references('id')->on('candidates');
         });
     }
 
