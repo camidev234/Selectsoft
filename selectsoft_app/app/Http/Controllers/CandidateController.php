@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CandidateController extends Controller
 {
@@ -12,7 +13,37 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        $experiencies = $user->experiences;
+        $educations = $user->educations;
+        $supports = $user->supports;
+
+        if (empty($experiencies)) {
+            $countExperiencies = 0;
+        } else {
+            $countExperiencies = count($experiencies);
+        }
+
+        if (empty($educations)){
+            $countEducations = 0;
+        } else {
+            $countEducations = count($educations);
+        }
+
+        if (empty($supports)) {
+            $countSupports = 0;
+        } else {
+            $countSupports = count($supports);
+        }
+
+        return view('/user/indexUser', [
+            'user' => $user,
+            'role_id' => $role_id,
+            'experiences' => $countExperiencies,
+            'educations' => $countEducations,
+            'supports' => $countSupports
+        ]);
     }
 
     /**

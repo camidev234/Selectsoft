@@ -15,10 +15,9 @@ return new class extends Migration
         Schema::create('candidate_supports', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('person_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('support_type_id')->references('id')->on('support_types');
             $table->string('support_file',100);
-            $table->foreignId('candidate_id')->references('id')->on('candidates');
         });
     }
 

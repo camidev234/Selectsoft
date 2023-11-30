@@ -25,16 +25,16 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'document_type_id' => 'required|exists:document_types,id',
-            'number_document' => 'required|string|max:255',
+            'number_document' => 'required|string|max:255|unique:users',
             'telephone' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:255',
+            'phone_number' => 'min:0|max:255',
             'address' => 'required|string|max:255',
             'id_country' => 'required|exists:countries,id',
             'id_department' => 'required|exists:departaments,id',
             'id_city' => 'required|exists:cities,id',
             'birthdate' => 'required|date',
             'email' => 'required|email|max:255',
-            'password' => 'required|string|min:8', // Ajusta según tus requisitos de contraseña
+            'password' => 'required|string|min:8',
             'role_id' => 'required|exists:roles,id',
         ];
     }

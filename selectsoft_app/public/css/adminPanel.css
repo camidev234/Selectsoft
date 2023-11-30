@@ -1,0 +1,196 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+.page {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 12.4vh 87.6vh;
+    grid-template-areas: "header header header"
+    "sidebar view-info view-info";
+}
+
+.page .header {
+    grid-area: header;
+    background-color: #2193b0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logout {
+    width: 20%;
+}
+
+.logout button {
+    border: none;
+    outline: none;
+    background-color: green;
+    padding: 15px 20px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.header .logo {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.header .user-log {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-log img {
+    width: 50px;
+    height: 50px;
+}
+
+
+.page .sidebar {
+    grid-area: sidebar;
+    height: 100%;
+    background-color: #1a2e44;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar .option-admin {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    gap: 30px;
+    padding-left: 90px;
+    border-right: 1px solid #134F5C;
+}
+
+
+
+.option-admin img {
+    width: 40px;
+    height: 40px;
+
+}
+
+
+.page .view-info {
+    grid-area: view-info;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.view-info .info-options {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+.info-options h4 {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-options .actions {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.actions .action {
+    display: flex;
+    gap: 17px;
+    align-items: center;
+}
+
+.action img {
+    width: 50px;
+    height: 50px;
+}
+
+.acOne img {
+    width: 30px;
+    height: 30px;
+}
+
+.table-content {
+    width: 90%;
+    height: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los botones de acción */
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+button i {
+    font-size: 1.2rem;/* Cambia el color según tu preferencia */
+}
+
+/* Añade algún espacio entre los botones */
+button + button {
+    margin-left: 10px;
+}
+
+.actions-table form {
+    display: inline-block; /* Hace que los formularios sean elementos en línea */
+    margin-right: 15px;
+}
+
+.btn {
+    color: tomato;
+}
+
+.btn2 {
+    color: blue;
+}
+

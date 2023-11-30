@@ -2,25 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use App\Models\Instructor;
+use App\Models\Recruiter;
+use App\Models\Selector;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InstructorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexListCandidates() :View
     {
-        //
+        $user = Auth::user();
+        $candidates = Candidate::all();
+
+        return view('/instructor/adminPanelC', [
+            'user' => $user,
+            'candidates' => $candidates
+        ]);
+    }
+
+    public function indexListRecruiters() {
+        $user = Auth::user();
+        $recruiters = Recruiter::all();
+
+        return view('/instructor/adminPanelR',[
+            'user' => $user,
+            'recruiters' => $recruiters
+        ]);
+    }
+
+    public function indexListSelectors() {
+        $user = Auth::user();
+        $selectors = Selector::all();
+
+        return view('/instructor/adminPanelS', [
+            'user' => $user,
+            'selectors' => $selectors
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() {
     }
 
     /**

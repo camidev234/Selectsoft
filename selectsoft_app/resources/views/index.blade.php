@@ -79,7 +79,7 @@
                         <img src="img/personIcon.jpg" alt="icono-persona">
                     </article>
                     <article class="hiper">
-                        <a href="">Registrarse</a>
+                        <a href="{{route('users.create')}}">Registrarse</a>
                     </article>
                 </section>
                 <section class="log-in cd">
@@ -87,7 +87,7 @@
                         <img src="img/keyIcon.png" alt="icono-inicio-sesion">
                     </article>
                     <article class="hiper">
-                        <a href="">Iniciar Sesion</a>
+                        <a href="{{route('user.login')}}">Iniciar Sesion</a>
                     </article>
                 </section>
             </section>
