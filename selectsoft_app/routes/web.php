@@ -83,3 +83,8 @@ Route::get('/admin/home/selectors', [InstructorController::class, 'indexListSele
 //mail
 
 Route::patch('/updatePassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
+
+//update password
+Route::get('newpassword',[UserController::class, 'newPassword'])->name('newPassword');
+Route::patch('updatePassword',[UserController::class,'updatePassword'])->name('update.password');
+

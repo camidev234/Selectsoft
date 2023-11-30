@@ -104,7 +104,7 @@ class UserController extends Controller
         return view('/auth/welcome');
 
     }
-
+  
     /**
      * Display the specified resource.
      */
@@ -128,6 +128,26 @@ class UserController extends Controller
     {
         //
     }
+
+    public function newPassword(){
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        return view('/update_password/update_password',[
+            'user' => $user,
+            'role_id' => $role_id
+        ]);
+    }
+
+    public function updatePassword(Request $request){
+
+        $user=Auth::user();
+        $usertoupdate=User::find($user->id);
+        $usertoupdate->password = $request->password;
+        $usertoupdate->save();
+        auth()->logout();
+        return redirect()->route('user.login');
+    }
+
 
     /**
      * Remove the specified resource from storage.

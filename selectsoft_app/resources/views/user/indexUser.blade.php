@@ -11,12 +11,21 @@
     @extends('layout.header')
     </header>
     @section('content')
+    
         <main class="principal_content">
             <section class="card-user">
                 <section class="card-header">
                     <h3>{{$user->name}} {{$user->last_name}}</h3>
                 </section>
+                
                 <section class="card-body">
+                    <article class="button_password">
+                        <section class="actions-card">
+                            <div class="action" id="actionTwo">
+                                <a href="{{route('newPassword')}}">Cambiar contraseña <i class="bi bi-key-fill"></i></a>
+                            </div>
+                        </section>
+                    </article>
                     <article class="experiencies">
                         <h5>Experiencias: {{$experiences}} </h5>
                         <section class="actions-card">
@@ -55,6 +64,7 @@
                             <button>Ver HDV completa <i class="bi bi-file-text-fill"></i></button>
                         </form>
                     </article>
+                    
                 </section>
             </section>
     </main>

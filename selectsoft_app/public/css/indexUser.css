@@ -67,6 +67,10 @@ article .action {
     align-items: center;
 }
 
+#actionTwo {
+    width: 100%;
+}
+
 .actions-card form{
     width: 20%;
     height: 100%;
