@@ -10,6 +10,8 @@ use App\Models\Document_type;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class UserController extends Controller
 {
@@ -18,7 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user=Auth::user();
+        return view('/users/index',[
+            'users' => $user
+        ]);
     }
 
     /**

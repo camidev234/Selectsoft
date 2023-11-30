@@ -23,7 +23,7 @@
             <nav class="bar-nav" id="bar">
                 <ul class="ul-list">
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="iniciosesion.html">Login</a></li>
+                    <li><a href="{{route('user.login')}}">Login</a></li>
                     <li><a href="{{route('users.create')}}">Sign In</a></li>
                     <li><a href="#">Sobre Nosotros</a></li>
                 </ul>

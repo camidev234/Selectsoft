@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\logoutcontroller;
 use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +37,12 @@ Route::delete('/occupations/deleteoccupation/{id}',[OccupationController::class,
 
 // auth routes
 
-Route::get('/register', [UserController::class, 'create'])->name('users.create');
+Route::get('/register', [UserController::class, 'create'])->name('users.create')->middleware('guest');
 Route::post('user/register', [UserController::class, 'store'])->name('user.store');
+
+Route::get('/login', [LoginController::class,'index'])->name('user.login');
+Route::post('/logininicio',[LoginController::class, 'autenticar'])->name('user.auth');
+Route::get('index',[UserController::class, 'index'])->name('user.index')->middleware('auth');
+
+//logout
+Route::post('logout',[logoutcontroller::class,'store'])->name('logout');
