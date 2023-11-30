@@ -116,17 +116,35 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        return view('/update_data/update_data',[
+            'user' => $user,
+            'role_id' => $role_id
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $user=Auth::user();
+        $newUser=User::find($user->id);
+        $newUser->name = $request->input('name');
+        $newUser->last_name = $request->input('last_name');
+        $newUser->document_type_id = $request->input('document_type_id');
+        $newUser->telephone = $request->input('telephone');
+        $newUser->phone_number = $request->input('phone_number');
+        $newUser->address = $request->input('address');
+        $newUser->id_country = $request->input('id_country');
+        $newUser->id_department = $request->input('id_department');
+        $newUser->id_city = $request->input('id_city');
+        
+        $newUser->save();
+        return redirect()->route('');
     }
 
     public function newPassword(){

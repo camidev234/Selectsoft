@@ -84,6 +84,10 @@ Route::get('/admin/home/selectors', [InstructorController::class, 'indexListSele
 
 Route::patch('/updatePassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
 
+//update data
+Route::get('/newdates',[UserController::class,'edit'])->name('new.dates');
+Route::patch('updatedates',[UserController::class,'update'])->name('updated.dates');
+
 //update password
 Route::get('newpassword',[UserController::class, 'newPassword'])->name('newPassword');
 Route::patch('updatePassword',[UserController::class,'updatePassword'])->name('update.password');

@@ -11,7 +11,9 @@
     @extends('layout.header')
     </header>
     @section('content')
-    
+        <article>
+            <a href="{{route('new.dates')}}">actualizar datos</a>
+        </article>
         <main class="principal_content">
             <section class="card-user">
                 <section class="card-header">
