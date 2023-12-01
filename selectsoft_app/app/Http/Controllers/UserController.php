@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserUpdataRequest;
 use App\Mail\WelcomeMailable;
 use App\Models\Candidate;
 use App\Models\City;
@@ -82,6 +83,8 @@ class UserController extends Controller
         if($request->role_id == 1) {
             $newCandidate = new Candidate();
             $newCandidate->user_id = $newUser->id;
+            $newCandidate->occupational_profile = 'NULL';
+            
 
             $newCandidate->save();
         }else if ($request->role_id == 2) {
@@ -104,7 +107,7 @@ class UserController extends Controller
         return view('/auth/welcome');
 
     }
-
+  
     /**
      * Display the specified resource.
      */
@@ -116,19 +119,68 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        $countries = Country::all();
+        $cities = City::all();
+        $departaments = Departament::all();
+        $document_types = Document_type::all();
+        $roles = Role::all();
+        return view('/update_data/update_data',[
+            'user' => $user,
+            'role_id' => $role_id,
+            'countries' => $countries,
+            'document_types' => $document_types,
+            'cities' => $cities,
+            'departaments' => $departaments,
+            'roles' => $roles
+        ]);
+        
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdataRequest $request)
     {
-        //
+        $user=Auth::user();
+        $newUser=User::find($user->id);
+        $newUser->name = $request->input('name');
+        $newUser->last_name = $request->input('last_name');
+        $newUser->document_type_id = $request->input('document_type_id');
+        $newUser->telephone = $request->input('telephone');
+        $newUser->phone_number = $request->input('phone_number');
+        $newUser->address = $request->input('address');
+        $newUser->id_country = $request->input('id_country');
+        $newUser->id_department = $request->input('id_department');
+        $newUser->id_city = $request->input('id_city');
+        
+        $newUser->save();
+        return redirect()->route('user.index');
     }
+
+    public function newPassword(){
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        return view('/update_password/update_password',[
+            'user' => $user,
+            'role_id' => $role_id
+        ]);
+    }
+
+    public function updatePassword(Request $request){
+
+        $user=Auth::user();
+        $usertoupdate=User::find($user->id);
+        $usertoupdate->password = $request->password;
+        $usertoupdate->save();
+        auth()->logout();
+        return redirect()->route('user.login');
+    }
+
 
     /**
      * Remove the specified resource from storage.

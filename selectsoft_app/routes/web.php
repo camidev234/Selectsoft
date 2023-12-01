@@ -50,6 +50,7 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 Route::get('/selectsoft/login', [LoginController::class, 'index'])->name('user.login')->middleware('guest');
 Route::post('/selectsoft/login/authenticate', [LoginController::class, 'authenticate'])->name('user.auth');
 Route::get('/forgotPassword', [ForgotPasswordController::class, 'index'])->name('forgotPassword.index')->middleware('guest');
+Route::post('/forgotPassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('user.logout');
 // candidate routes
 
@@ -68,6 +69,8 @@ Route::get('/myexperiences/edit/{person_experience}', [PersonExperienceControlle
 Route::patch('/myexperiences/update/{person_experience}', [PersonExperienceController::class, 'update'])->name('exp.update');
 Route::get('/supports/create', [CandidateSupportController::class, 'create'])->name('supports.create')->middleware('auth');
 Route::post('/supports/store', [CandidateSupportController::class, 'store'])->name('supports.store');
+Route::get('/user/updateProfile', [CandidateController::class, 'editProfile'])->name('candidate.editProfile')->middleware('auth');
+Route::patch('/user/saveProfile', [CandidateController::class, 'updateProfile'])->name('candidate.saveProfile');
 // selector routes
 
 Route::get('/selector/home', [SelectorController::class, 'index'])->name('selector.index')->middleware('auth');
@@ -84,4 +87,13 @@ Route::get('/admin/home/selectors', [InstructorController::class, 'indexListSele
 Route::get('/admin/home/candidates/editC/{id}', [InstructorController::class, 'edit'])->name('instructor.editC')->middleware('auth');
 //mail
 
-Route::patch('/updatePassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
+Route::patch('/sendNewPassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
+
+//update data
+Route::get('/newdates',[UserController::class,'edit'])->name('new.dates');
+Route::patch('updatedates',[UserController::class,'update'])->name('updated.dates');
+
+//update password
+Route::get('newpassword',[UserController::class, 'newPassword'])->name('newPassword');
+Route::patch('/update/Password',[UserController::class,'updatePassword'])->name('update.password');
+

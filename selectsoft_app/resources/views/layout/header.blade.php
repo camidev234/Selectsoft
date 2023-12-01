@@ -38,7 +38,7 @@
                     <h5>
                         <form action="{{route('user.logout')}}" method="post">
                             @csrf
-                            <button>Cerrar sesion</button>
+                            <button>Cerrar sesion <i class="bi bi-power"></i></button>
                         </form>
                     </h5>
                 </div>
