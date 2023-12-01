@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserUpdataRequest;
 use App\Mail\WelcomeMailable;
 use App\Models\Candidate;
 use App\Models\City;
@@ -122,16 +123,27 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $role_id = $user->role_id;
+        $countries = Country::all();
+        $cities = City::all();
+        $departaments = Departament::all();
+        $document_types = Document_type::all();
+        $roles = Role::all();
         return view('/update_data/update_data',[
             'user' => $user,
-            'role_id' => $role_id
+            'role_id' => $role_id,
+            'countries' => $countries,
+            'document_types' => $document_types,
+            'cities' => $cities,
+            'departaments' => $departaments,
+            'roles' => $roles
         ]);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UserUpdataRequest $request)
     {
         $user=Auth::user();
         $newUser=User::find($user->id);
@@ -146,7 +158,7 @@ class UserController extends Controller
         $newUser->id_city = $request->input('id_city');
         
         $newUser->save();
-        return redirect()->route('');
+        return redirect()->route('user.index');
     }
 
     public function newPassword(){

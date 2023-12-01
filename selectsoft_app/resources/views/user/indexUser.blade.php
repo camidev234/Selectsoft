@@ -27,7 +27,7 @@
                     <article class="button_password">
                         <section class="actions-card">
                             <div class="action" id="actionTwo">
-                                <a href="">Actualizar Informacion <i class="bi bi-person-fill-up"></i></a>
+                                <a href="{{route('new.dates')}}">Actualizar Informacion <i class="bi bi-person-fill-up"></i></a>
                             </div>
                         </section>
                     </article>
