@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('css/createEducation.css')}}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
@@ -11,6 +12,7 @@
         @extends('layout.header')
     </header>
     @section('content')
+    <main class="container">
     <form action="{{route('updated.dates')}}" method="post">
         @csrf
         @method('PATCH')
@@ -42,7 +44,6 @@
             </section>
         </section>
         <section id="ubicacion">
-            <h2>UBICACIÓN</h2>
             <section class="info">
                 <article>
                     <label for="pais">PAÍS</label>
@@ -96,7 +97,9 @@
 
     </section>
     <input type="submit" value="actualizar">
+    
 </form>
+</main>
     @endsection
 
 </body>
