@@ -49,6 +49,7 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.stor
 Route::get('/selectsoft/login', [LoginController::class, 'index'])->name('user.login')->middleware('guest');
 Route::post('/selectsoft/login/authenticate', [LoginController::class, 'authenticate'])->name('user.auth');
 Route::get('/forgotPassword', [ForgotPasswordController::class, 'index'])->name('forgotPassword.index')->middleware('guest');
+Route::post('/forgotPassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('user.logout');
 // candidate routes
 
@@ -84,7 +85,7 @@ Route::get('/admin/home/recruiters', [InstructorController::class, 'indexListRec
 Route::get('/admin/home/selectors', [InstructorController::class, 'indexListSelectors'])->name('instructor.selectors');
 //mail
 
-Route::patch('/updatePassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
+Route::patch('/sendNewPassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');
 
 //update data
 Route::get('/newdates',[UserController::class,'edit'])->name('new.dates');
@@ -92,5 +93,5 @@ Route::patch('updatedates',[UserController::class,'update'])->name('updated.date
 
 //update password
 Route::get('newpassword',[UserController::class, 'newPassword'])->name('newPassword');
-Route::patch('updatePassword',[UserController::class,'updatePassword'])->name('update.password');
+Route::patch('/update/Password',[UserController::class,'updatePassword'])->name('update.password');
 
