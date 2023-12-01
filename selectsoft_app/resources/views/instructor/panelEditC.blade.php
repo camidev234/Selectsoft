@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{asset('css/adminPanel.css')}}">
-    <title>Panel de administrador</title>
+    <title>Editar Candidato</title>
 </head>
 <body>
     <main class="page">
@@ -24,7 +24,6 @@
                 </form>
             </section>
         </header>
-
         <section class="sidebar">
             <a href="{{route('instructor.index')}}"><article class="option-admin modi" style="background-color: white;">
                 <img src="{{asset('img/personIcon.jpg')}}" alt="icono_persona">
@@ -65,36 +64,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><h5>Tipo De Documento</h5></th>
-                            <th><h5>Documento</h5></th>
-                            <th><h5>Nombres</h5></th>
-                        <!-- <th><h5>Primer Apellido</h5></th> -->
-                            <th><h5>Apellidos</h5></th>
-                            <th><h5>Acciones</h5></th>
+                            <th><h5>Id Rol</h5></th>
+                            <th><h5>Cambiar Rol</h5>
                         </tr>
                     </thead>
-                    <tbody>
-                        @forelse($candidates as $candidate)
-                            <tr>
-                                <td>{{$candidate->user->document_type->document_type}}</td>
-                                <td>{{$candidate->user->number_document}}</td>
-                                <td>{{$candidate->user->name}}</td>
-                                <td>{{$candidate->user->last_name}}</td>
-                                <td class="actions-table">
-                                    <a href="{{route('instructor.editC', ['id' => $candidate->id])}}">
-                                        <button><i class="bi bi-pencil-fill btn2"></i></button>
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td>No hay Candidatos para mostrar</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
                 </table>
             </section>
-        </section>
-    </main>
 </body>
 </html>

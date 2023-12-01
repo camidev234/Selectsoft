@@ -13,6 +13,7 @@ use App\Http\Controllers\RecruiterController;
 use App\Http\Controllers\SelectorController;
 use App\Http\Controllers\UserController;
 use App\Mail\WelcomeMailable;
+use App\Models\Instructor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,7 @@ Route::get('/recruiter/home', [RecruiterController::class, 'index'])->name('recr
 Route::get('/admin/home/candidates', [InstructorController::class, 'indexlistCandidates'])->name('instructor.index')->middleware('auth');
 Route::get('/admin/home/recruiters', [InstructorController::class, 'indexListRecruiters'])->name('instructor.recruiters')->middleware('auth');
 Route::get('/admin/home/selectors', [InstructorController::class, 'indexListSelectors'])->name('instructor.selectors');
+Route::get('/admin/home/candidates/editC/{id}', [InstructorController::class, 'edit'])->name('instructor.editC')->middleware('auth');
 //mail
 
 Route::patch('/updatePassword', [ForgotPasswordController::class, 'findUser'])->name('forgotPassword.find');

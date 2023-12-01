@@ -72,17 +72,29 @@ class InstructorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Instructor $instructor)
+    public function edit($id)
     {
-        //
+        $user = Auth::user();
+        $candidate = Candidate::findOrFail($id);
+
+        return view('/instructor/panelEditC',[
+            'user' => $user,
+            'candidate' => $candidate,
+        ]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Instructor $instructor)
+    public function update(Request $request, $id)
     {
-        //
+        $instructor=Instructor::findOrFail($id);
+        $instructor->role_id=$request->role_id;
+
+        $instructor->save();
+
+        return redirect()->route('instructor.editC', ['id' => $instructor->id]);
     }
 
     /**
