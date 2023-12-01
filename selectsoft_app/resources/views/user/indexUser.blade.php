@@ -37,7 +37,7 @@
                     <article class="button_password">
                         <section class="actions-card">
                             <div class="action" id="actionTwo">
-                                <a href="">Actualizar Perfil <i class="bi bi-person-fill"></i></a>
+                                <a href="{{route('candidate.editProfile')}}">Actualizar Perfil <i class="bi bi-person-fill"></i></a>
                             </div>
                         </section>
                     </article>
@@ -85,7 +85,7 @@
                 <section class="user_c_container">
                     <div class="profile">
                         <h3>Perfil Profesional: </h3>
-                        <p></p>
+                        <p>{{$profile}}</p>
                     </div>
                 </section>
             </section>
