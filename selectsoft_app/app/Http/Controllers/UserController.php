@@ -82,6 +82,8 @@ class UserController extends Controller
         if($request->role_id == 1) {
             $newCandidate = new Candidate();
             $newCandidate->user_id = $newUser->id;
+            $newCandidate->occupational_profile = 'NULL';
+            
 
             $newCandidate->save();
         }else if ($request->role_id == 2) {
