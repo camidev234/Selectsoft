@@ -47,6 +47,17 @@ class InstructorController extends Controller
         ]);
     }
 
+    public function indexListInstructors() {
+        $user = Auth::user();
+        $instructors = Instructor::all();
+
+        return view('/instructor/adminPanelInst', [
+            'user' => $user,
+            'instructors' => $instructors
+        ]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

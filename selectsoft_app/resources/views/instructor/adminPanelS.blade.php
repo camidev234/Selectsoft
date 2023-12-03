@@ -8,24 +8,9 @@
     <title>Panel de administrador</title>
 </head>
 <body>
-    <main class="page">
-        <header class="header">
-            <section class="logo">
-                <img src="{{asset('img/SELECTSOFTFooterIcon.png')}}" alt="">
-            </section>
-            <section class="user-log">
-                <img src="{{asset('img/personIcon.jpg')}}" alt="">
-                <h5>{{$user->name}} {{$user->last_name}}</h5>
-            </section>
-            <section class="logout">
-                <form action="{{route('user.logout')}}" method="post">
-                    @csrf
-                    <button>Cerrar sesion</button>
-                </form>
-            </section>
-        </header>
-
-        <section class="sidebar">
+    @extends('layout.headerAdmin')
+    @section('content')
+    <section class="sidebar">
             <a href="{{route('instructor.index')}}"><article class="option-admin modi">
                 <img src="{{asset('img/personIcon.jpg')}}" alt="icono_persona">
                 <h3>Ver candidatos</h3>
@@ -41,7 +26,7 @@
                 <h3>Ver Seleccionadores</h3>
             </article></a>
 
-            <a href=""><article class="option-admin">
+            <a href="{{route('instructor.instructors')}}"><article class="option-admin">
                 <img src="{{asset('img/descarga__12_-removebg-preview.png')}}" alt="icono_verA">
                 <h3>Ver Administradores</h3>
             </article></a>
@@ -50,7 +35,7 @@
 
         <section class="view-info">
             <section class="info-options">
-                <h4>Listado de Candidatos en el sistema</h4>
+                <h4>Listado de Seleccionadores en el sistema</h4>
                 <section class="actions">
                     <article class="action acOne">
                         <img src="{{asset('img/icone-crayon-bleu.png')}}" alt="lapiz_icon">
@@ -66,26 +51,23 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><h5>Tipo De Documento</h5></th>
                             <th><h5>Documento</h5></th>
                             <th><h5>Nombres</h5></th>
                         <!-- <th><h5>Primer Apellido</h5></th> -->
                             <th><h5>Apellidos</h5></th>
+                            <th><h5>Empresa</h5></th>
                             <th><h5>Acciones</h5></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($selectors as $selector)
                             <tr>
-                                <td>{{$selector->user->document_type->document_type}}</td>
                                 <td>{{$selector->user->number_document}}</td>
                                 <td>{{$selector->user->name}}</td>
                                 <td>{{$selector->user->last_name}}</td>
+                                <td>{{ optional($selector->company)->business_name }}</td>
                                 <td class="actions-table">
-                                    <form action="">
-                                        <button><i class="bi bi-trash-fill btn"></i></button>
-                                    </form>
-                                    <form action="">
+                                    <form action="{{route('instructor.editUserRole', ['user' => $selector->user->id])}}" method="get">
                                         <button><i class="bi bi-pencil-fill btn2"></i></button>
                                     </form>
                                 </td>
@@ -99,7 +81,6 @@
                 </table>
             </section>
         </section>
-    </main>
+    @endsection
 </body>
 </html>
-

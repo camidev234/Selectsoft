@@ -68,7 +68,7 @@ class UserController extends Controller
         $newUser->birthdate = $request->input('birthdate');
         $newUser->email = $request->input('email');
         $newUser->password = $request->input('password');
-        $newUser->role_id = $request->input('role_id');
+        $newUser->role_id = 1;
 
         $newUser->save();
 
@@ -80,34 +80,86 @@ class UserController extends Controller
         Mail::to($mail)->send(new WelcomeMailable($userName));
 
 
-        if($request->role_id == 1) {
+        if($newUser->role_id == 1) {
             $newCandidate = new Candidate();
             $newCandidate->user_id = $newUser->id;
             $newCandidate->occupational_profile = 'NULL';
-            
+
 
             $newCandidate->save();
-        }else if ($request->role_id == 2) {
-            $newSelector = new Selector();
-            $newSelector->user_id = $newUser->id;
-
-            $newSelector->save();
-        } else if($request->role_id == 3) {
-            $newRecruiter = new Recruiter();
-            $newRecruiter->user_id = $newUser->id;
-
-            $newRecruiter->save();
-        } else if($request->role_id == 4) {
-            $newInstructor = new Instructor();
-            $newInstructor->user_id = $newUser->id;
-
-            $newInstructor->save();
         }
 
         return view('/auth/welcome');
 
     }
-  
+
+
+    public function editUserRole(User $user) {
+        $userAuth = Auth::user();
+        $roles = Role::all();
+        $rolesReturn = [];
+
+        foreach($roles as $role) {
+            if ($role->id == $user->role_id ){
+                continue;
+            } else {
+                $rolesReturn[] = $role;
+            }
+        }
+
+        return view('/instructor/editRole', [
+            'userToMod' => $user,
+            'user' => $userAuth,
+            'roles' => $rolesReturn
+        ]);
+    }
+
+    public function updateUserRole(User $userMod, Request $request) {
+        if($userMod->role_id ==1){
+            $candidate = Candidate::where('user_id', $userMod->id)->first();
+
+            $candidate->delete();
+        }else if ($userMod->role_id == 2) {
+            $selector = Selector::where('user_id', $userMod->id)->first();
+            $selector->delete();
+        } else if($userMod->role_id == 3){
+            $recruiter = Recruiter::where('user_id', $userMod->id)->first();
+            $recruiter->delete();
+        } else if($userMod->role_id == 4){
+            $instructor = Instructor::where('user_id', $userMod->id)->first();
+            $instructor->delete();
+        }
+
+
+        $userMod->role_id = $request->role_id;
+
+
+        $userMod->save();
+
+        if($userMod->role_id == 1) {
+            $newcandidate = new Candidate();
+            $newcandidate->user_id = $userMod->id;
+            $newcandidate->occupational_profile = 'NULL';
+            $newcandidate->save();
+        } else if ($userMod->role_id == 2) {
+            $newselector = new Selector();
+            $newselector->user_id = $userMod->id;
+            $newselector->save();
+        } else if($userMod->role_id == 3) {
+            $newRecruiter = new Recruiter();
+            $newRecruiter->user_id = $userMod->id;
+            $newRecruiter->save();
+        } else if($userMod->role_id == 4) {
+            $newInstructor = new Instructor();
+            $newInstructor->user_id = $userMod->id;
+            $newInstructor->save();
+        }
+
+
+
+        return redirect()->route('instructor.index');
+    }
+
     /**
      * Display the specified resource.
      */
@@ -137,7 +189,7 @@ class UserController extends Controller
             'departaments' => $departaments,
             'roles' => $roles
         ]);
-        
+
     }
 
 
@@ -157,7 +209,7 @@ class UserController extends Controller
         $newUser->id_country = $request->input('id_country');
         $newUser->id_department = $request->input('id_department');
         $newUser->id_city = $request->input('id_city');
-        
+
         $newUser->save();
         return redirect()->route('user.index');
     }
