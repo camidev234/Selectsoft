@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateSupportController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EducationPersonController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\InstructorController;
@@ -78,6 +79,7 @@ Route::get('/selector/home', [SelectorController::class, 'index'])->name('select
 // recruiter routes
 
 Route::get('/recruiter/home', [RecruiterController::class, 'index'])->name('recruiter.index')->middleware('auth');
+Route::post('/createCompany', [CompanyController::class, 'store'])->name('company.store');
 
 // instructor routes
 

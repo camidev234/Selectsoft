@@ -16,11 +16,10 @@ return new class extends Migration
             $table->string('nit', 45);
             $table->string('business_name',45);
             $table->string('phone',45);
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->string('email',100);
             $table->string('address',45);
-            $table->foreignId('recruiter_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('selector_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
