@@ -20,14 +20,14 @@
                     <article class="button_password">
                         <section class="actions-card">
                             <div class="action" id="actionTwo">
-                                <a href="{{route('newPassword')}}">Cambiar contraseña <i class="bi bi-key-fill"></i></a>
+                                <a href="{{route('user.updatePassword')}}">Cambiar contraseña <i class="bi bi-key-fill"></i></a>
                             </div>
                         </section>
                     </article>
                     <article class="button_password">
                         <section class="actions-card">
                             <div class="action" id="actionTwo">
-                                <a href="{{route('new.dates')}}">Actualizar Informacion <i class="bi bi-person-fill-up"></i></a>
+                                <a href="{{route('user.updatePassword')}}">Actualizar Informacion <i class="bi bi-person-fill-up"></i></a>
                             </div>
                         </section>
                     </article>

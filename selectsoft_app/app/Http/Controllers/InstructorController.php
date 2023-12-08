@@ -57,7 +57,6 @@ class InstructorController extends Controller
         ]);
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
@@ -83,29 +82,17 @@ class InstructorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Instructor $instructor)
     {
-        $user = Auth::user();
-        $candidate = Candidate::findOrFail($id);
-
-        return view('/instructor/panelEditC',[
-            'user' => $user,
-            'candidate' => $candidate,
-        ]);
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Instructor $instructor)
     {
-        $instructor=Instructor::findOrFail($id);
-        $instructor->role_id=$request->role_id;
-
-        $instructor->save();
-
-        return redirect()->route('instructor.editC', ['id' => $instructor->id]);
+        //
     }
 
     /**

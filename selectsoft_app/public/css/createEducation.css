@@ -8,23 +8,23 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.form label {
     margin-bottom: 8px;
 }
 
-input, select, textarea {
+.form input, select, textarea {
     padding: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-button {
+.form button {
     padding: 10px 15px;
     background-color: #2193b0;
     color: white;
@@ -33,8 +33,9 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.form button:hover {
     background-color: #1e7fa0;
 }
+
 
 

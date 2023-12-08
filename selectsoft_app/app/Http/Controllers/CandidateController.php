@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Candidate;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,8 @@ class CandidateController extends Controller
         $experiencies = $user->experiences;
         $educations = $user->educations;
         $supports = $user->supports;
+
+        // Candidate::where('user_id', $user->id)->first();
         $candidate = $user->candidate;
 
         $profile = $candidate->occupational_profile;
@@ -54,7 +57,6 @@ class CandidateController extends Controller
             'profile' => $profile
         ]);
     }
-
 
     public function editProfile() {
         $user = Auth::user();

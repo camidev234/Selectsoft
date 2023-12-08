@@ -1,36 +1,48 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OccupationRequest;
+use App\Http\Requests\UpdateOccupationRequest;
 use App\Models\Occupation;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OccupationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() :View
     {
         $allOccupations = Occupation::all();
-
+        $user = Auth::user();
+        $role_id = $user->role_id;
         return view('/occupation/indexOccupation', [
-            'allOccupations' => $allOccupations
+            'allOccupations' => $allOccupations,
+            'user' => $user,
+            'role_id' => $role_id
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() :View
     {
-        return view('/occupation/create_occupation');
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        return view('/occupation/create_occupation', [
+            'user' => $user,
+            'role_id' => $role_id
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $datos)
+    public function store(OccupationRequest $datos) :RedirectResponse
     {
         $new1=new Occupation();
 
@@ -46,9 +58,17 @@ class OccupationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Occupation $occupation)
+    public function show(Occupation $occupation) :View
     {
-        //
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        $functions = $occupation->functions;
+        return view('/occupation/show', [
+            'user' => $user,
+            'role_id' => $role_id,
+            'occupation' => $occupation,
+            'functions' => $functions
+        ]);
     }
 
     /**
@@ -56,16 +76,19 @@ class OccupationController extends Controller
      */
     public function edit(Occupation $occupation)
     {
-    
+        $user = Auth::user();
+        $role_id = $user->role_id;
         return view('/occupation/updateOccupation',[
-            'occupation' => $occupation
+            'occupation' => $occupation,
+            'user' => $user,
+            'role_id' => $role_id
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$occupation)
+    public function update(UpdateOccupationRequest $request,$occupation)
     {
         $occupation1=Occupation::findOrFail($occupation);
         $occupation1->occupation_code=$request->occupation_code;

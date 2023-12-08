@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('charge');
             $table->foreignId('occupation_id')->constrained('occupations')->onDelete('cascade');
-            $table->foreignId('company_id')->references('id')->on('companies');
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }
