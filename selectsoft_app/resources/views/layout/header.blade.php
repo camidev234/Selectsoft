@@ -36,7 +36,7 @@
                 @else
                 <div class="actions">
                     @if($role_id == 2)
-                    <h5><i class="bi bi-house-fill"></i> <a href="{{route('selector.index')}}">{{$user->name}}</a></h5>
+                    <h5><i class="bi bi-house-fill"></i> <a href="{{route('selector.index')}}">{{ optional(auth()->user())->name }}</a></h5>
                     @elseif($role_id == 3)
                     <h5><i class="bi bi-house-fill"></i> <a href="{{route('recruiter.index')}}">{{$user->name}}</a></h5>
                     @endif

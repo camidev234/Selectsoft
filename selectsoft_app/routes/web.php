@@ -1,25 +1,27 @@
 <?php
 
-use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\CandidateSupportController;
-use App\Http\Controllers\ChargeController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\EducationPersonController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\OccupationController;
-use App\Http\Controllers\OccupationFunctionController;
-use App\Http\Controllers\PersonExperienceController;
-use App\Http\Controllers\RecruiterController;
-use App\Http\Controllers\SelectorController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VacancieController;
 use App\Mail\WelcomeMailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ChargeController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SelectorController;
+use App\Http\Controllers\VacancieController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\RecruiterController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\OccupationController;
+use App\Http\Controllers\RequisitionController;
+use App\Http\Controllers\VacancieStudyController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\EducationPersonController;
+use App\Http\Controllers\CandidateSupportController;
+use App\Http\Controllers\PersonExperienceController;
+use App\Http\Controllers\OccupationFunctionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +87,7 @@ Route::get('/selector/home', [SelectorController::class, 'index'])->name('select
 
 
 Route::get('/recruiter/home', [RecruiterController::class, 'index'])->name('recruiter.index')->middleware('auth');
+Route::get('/recruiter', ['RecruiterController@index'])->name('recruiter.index');
 Route::post('/createCompany', [CompanyController::class, 'store'])->name('company.store');
 Route::get('/companies/allCompanies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::get('/companies/findCompany', [CompanyController::class, 'findCompany'])->name('company.findCompany');
@@ -111,6 +114,21 @@ Route::post('/occupationFunctions/update/{occupation_function}/{occupation}', [O
 Route::delete('/occupationFunctions/delete/{occupation_function}/{occupation}', [OccupationFunctionController::class, 'destroy'])->name('occupationFunction.destroy');
 Route::get('/vacancie/edit/{vacancie}/{company}', [VacancieController::class, 'edit'])->name('vacancies.edit')->middleware('auth');
 Route::patch('/vacancie/update/{vacancie}/{company}', [VacancieController::class, 'update'])->name('vacancies.update');
+
+Route::get('/vacancie_studies', [VacancieStudyController::class, 'index'])->name('vacancie_studies.index');
+Route::get('/vacancie_studies/create', [VacancieStudyController::class, 'create'])->name('vacancie_studies.create');
+Route::post('/vacancie_studies/store', [VacancieStudyController::class, 'store'])->name('vacancie_studies.store');
+Route::get('/vacancie_studies/{vacancieStudy}/edit', [VacancieStudyController::class, 'edit'])->name('vacancie_studies.edit');
+Route::put('/vacancie_studies/{vacancieStudy}', [VacancieStudyController::class, 'update'])->name('vacancie_studies.update');
+Route::delete('/vacancie_studies/{vacancieStudy}', [VacancieStudyController::class, 'destroy'])->name('vacancie_studies.destroy');
+
+Route::get('/requisitions/index', [RequisitionController::class, 'index'])->name('requisition.index');
+Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
+Route::post('/requisitions/store', [RequisitionController::class, 'store'])->name('requisitions.store');
+Route::delete('/requisitions/{requisition}', [RequisitionController::class, 'destroy'])->name('requisitions.destroy');
+Route::get('/requisitions/{requisition}', [RequisitionController::class, 'show'])->name('requisitions.show');
+Route::get('/requisitions/{requisition}/edit', [RequisitionController::class, 'edit'])->name('requisitions.edit');
+
 // instructor routes
 
 

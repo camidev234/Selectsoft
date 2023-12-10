@@ -22,4 +22,9 @@ class Occupation extends Model
     public function charges() :HasMany {
         return $this->hasMany(Charge::class);
     }
+
+    public function requisition()
+    {
+        return $this->hasMany(requisition::class, 'ocupacion_id');
+    }
 }

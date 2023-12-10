@@ -84,6 +84,12 @@
                 <option value="{{$city->id}}">{{$city->city_name}}</option>
                 @endforeach
             </select><br>
+            <label for="">Estudio Vacante: </label><br>
+            <select name="vacancie_studies_id" id="">
+                @foreach($vacancie_studies as $vacancie_study)
+                <option value="{{$vacancie_study->id}}">{{$vacancie_study->study_level_id}}</option>
+                @endforeach
+            </select><br>
             <label for="">Anotaciones: </label><br>
             <textarea name="annotations" id="" cols="30" rows="15">{{old('annotations')}}</textarea><br>
             @error('annotations')

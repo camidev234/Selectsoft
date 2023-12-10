@@ -11,8 +11,13 @@ class Vacancie extends Model
 {
     use HasFactory;
 
-    public function aplications() {
-        return $this->hasMany(aplications::class, 'vacant_id', 'id');
+    public function applications() {
+        return $this->hasMany(applications::class, 'vacant_id', 'id');
+    }
+
+    public function Vacancie_study()
+    {
+        return $this->hasMany(Vacancie_study::class, 'vacancie_id');
     }
 
     public function charge() :BelongsTo {
@@ -34,4 +39,6 @@ class Vacancie extends Model
     public function city() :BelongsTo {
         return $this->belongsTo(City::class);
     }
+
+    
 }

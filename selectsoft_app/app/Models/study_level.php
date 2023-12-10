@@ -13,4 +13,9 @@ class study_level extends Model
     public function education_person() :HasMany {
         return $this->hasMany(Education_person::class);
     }
+
+    public function Vacancie_Study()
+    {
+        return $this->hasMany(Vacancie_study::class, 'study_level_id');
+    }
 }

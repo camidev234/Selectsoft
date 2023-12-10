@@ -9,6 +9,7 @@ use App\Models\Person_experience;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
