@@ -61,7 +61,7 @@
                     Inactiva
                     @endif
                     </p>
-                    <p><strong>Numero de postulados: </strong>0</p>
+                    <p><strong>Numero de postulados: </strong>{{$applicants}}</p>
                 </article>
             </section>
             <section class="generalTitle">
@@ -81,11 +81,46 @@
                 <article>
                     <h3>Educacion requerida</h3>
                 </article>
+                <section class="addEducation">
+                    <form action="{{ route('vacancie_studies.create', ['vacancie'=>$vacancie->id]) }}" method="get">
+                        <button>Añadir educacion</button>
+                    </form>
+                </section>
                 <article class="educationsTable">
                     <table>
-
+                        <thead>
+                            <tr>
+                                <th>Nivel</th>
+                                <th>Estado</th>
+                                <th>Profesion</th>
+                                <th>Puntos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($studies as $study)
+                                <tr>
+                                    <td>{{$study->study_level->study_level}}</td>
+                                    <td>{{$study->study_status->study_status}}</td>
+                                    <td>{{$study->study_name}}</td>
+                                    <td>{{$study->points}}</td>
+                                    <td class="actionTrash">
+                                        <form action="" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button><i class="bi bi-trash3"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td>Esta vacante no requiere algun estudio aun</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </article>
+                <br>
             </section>
             <section class="generalTitle">
                 <h3>Funciones </h3>
@@ -116,10 +151,15 @@
                     @method('PATCH')
                     <button>Cambiar estado</button>
                 </form>
+                @if($applicants > 0)
                 <form action="" method="post">
                     <button>Ver postulados</button>
                 </form>
+                @endif
             </article>
+            <section class="back">
+                <a href="{{route('vacancies.index', ['company' => $company->id])}}">Volver</a>
+            </section>
         </section>
     </section>
     @endsection

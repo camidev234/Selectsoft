@@ -11,10 +11,9 @@ class Vacancie_study extends Model
 
     protected $fillable = [
         'study_level_id',
-        'vacancie_id',
         'study_status_id',
         'study_name',
-        'points',
+        'points'
     ];
 
     public function studyLevel()
@@ -29,6 +28,7 @@ class Vacancie_study extends Model
 
     public function vacancie()
     {
-        return $this->belongsTo(Vacancie::class, 'vacancie_id');
+        return $this->belongsTo(Vacancie::class);
     }
+
 }

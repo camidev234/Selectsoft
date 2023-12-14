@@ -44,7 +44,7 @@
                         <article class="option op-3">
                             <h5>Requisiciones</h5>
                             <a href="{{route('requisitions.create')}}" class="add"><i class="bi bi-plus-square"></i></a>
-                            <a href="{{route('requisitions.index')}}" class="view"><i class="bi bi-eye"></i></a>
+                            <a href="{{route('requisition.index')}}" class="view"><i class="bi bi-eye"></i></a>
                         </article>
                         <article class="option op-4">
                             <h5>Ocupaciones</h5>

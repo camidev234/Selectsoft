@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
             $table->string('vacancie_code')->unique();
-            $table->string('skills',500)->default('Niinguna');
+            $table->string('skills',500)->default('Ninguna');
             $table->unsignedBigInteger('required_experience');
             $table->string('salary_range',45);
             $table->unsignedSmallInteger('number_vacancies');

@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\applications;
 
 class VacancieController extends Controller
 {
@@ -41,7 +42,7 @@ class VacancieController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() :View
+    public function create()
     {
         $user = Auth::user();
         $role_id = $user->role_id;
@@ -108,12 +109,19 @@ class VacancieController extends Controller
         $user = Auth::user();
         $role_id = $user->role_id;
         $functions = $vacancie->charge->occupation->functions;
+        $educations = $vacancie->studies;
+        $company = $vacancie->company;
+        $applicants = applications::where('vacant_id', $vacancie->id)->get();
 
+        $countApplicants = $applicants->isEmpty() ? 0 : $applicants->count();
         return view('/vacancie/showRecruiter', [
             'user' => $user,
             'role_id' => $role_id,
             'vacancie' => $vacancie,
             'functions' => $functions,
+            'studies' => $educations,
+            'company' => $company,
+            'applicants' => $countApplicants
         ]);
     }
 

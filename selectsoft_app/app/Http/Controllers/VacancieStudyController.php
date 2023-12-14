@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\study_level;
 use App\Models\study_status;
-use App\Models\Vacancie;
 use App\Models\Vacancie_study;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Vacancie;
+use Illuminate\Contracts\View\View;
 
 class VacancieStudyController extends Controller
 {
@@ -16,37 +19,44 @@ class VacancieStudyController extends Controller
     public function index()
     {
         $vacancieStudies = Vacancie_study::all();
-        return view('vacancie_studies.index', compact('vacancieStudies'));
+        $studyLevels = study_level::all();
+        $studyStatuses = study_status::all();
+        $users = User::all();
+        $user = Auth::user();
+        $role_id = $user->role_id;
+        return view('vacancie_studies.index', compact('vacancieStudies', 'studyLevels', 'studyStatuses',  'user', 'role_id'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Vacancie $vacancie) :View
     {
-        $studyLevels = study_level::all();
-        $studyStatuses = study_status::all();
-        $vacancies = Vacancie::all();
+        $levels = study_level::all();
+        $statuses = study_status::all();
+        $users = User::all();
+        $user = Auth::user();
+        $role_id = $user->role_id;
 
-        return view('vacancie_studies.create', compact('studyLevels', 'studyStatuses', 'vacancies'));
+        return view('vacancie_studies.create', compact('levels', 'statuses',  'user', 'role_id', 'vacancie'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request , Vacancie $vacancie)
     {
-        $request->validate([ 
-            'study_level_id' => 'required',
-            'vacancie_id' => 'required',
-            'study_status_id' => 'required',
-            'study_name' => 'required',
-            'points' => 'required',
-        ]);
+        $newStudy = new Vacancie_study();
 
-        Vacancie_study::create($request->all());
+        $newStudy->study_level_id = $request->study_level_id;
+        $newStudy->study_status_id = $request->study_status_id;
+        $newStudy->study_name = $request->study_name;
+        $newStudy->points = $request->points;
+        $newStudy->vacancie_id = $vacancie->id;
 
-        return redirect()->route('vacancie_studies.index');
+        $newStudy->save();
+
+        return redirect()->route('vacancie_studies.index')->with('success', 'Estudio de vacante creado correctamente');
     }
 
     /**
@@ -54,7 +64,8 @@ class VacancieStudyController extends Controller
      */
     public function show(Vacancie_study $vacancie_study)
     {
-        //
+        $vacancie_study = Vacancie_study::findOrFail($vacancie_study);
+        return view('vacancie_studies.show', compact('vacancieStudies'));
     }
 
     /**
@@ -64,9 +75,8 @@ class VacancieStudyController extends Controller
     {
         $studyLevels = study_level::all();
         $studyStatuses = study_status::all();
-        $vacancies = Vacancie::all();
 
-        return view('vacancie_studies.edit', compact('vacancieStudy', 'studyLevels', 'studyStatuses', 'vacancies'));
+        return view('vacancie_studies.edit', compact('vacancie_study', 'studyLevels', 'studyStatuses'));
     }
 
     /**
@@ -76,24 +86,24 @@ class VacancieStudyController extends Controller
     {
         $request->validate([
             'study_level_id' => 'required',
-            'vacancie_id' => 'required',
             'study_status_id' => 'required',
             'study_name' => 'required',
             'points' => 'required',
         ]);
 
+        $vacancie_study = Vacancie_study::findOrFail($vacancie_study);
         $vacancie_study->update($request->all());
 
-        return redirect()->route('vacancie_studies.index');
+        return redirect()->route('vacancie_studies.index')->with('success', 'Estudio de vacante actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vacancie_study $vacancie_study)
+    public function destroy(Vacancie_study $vacancieStudy)
     {
-        $vacancie_study->delete();
+        $vacancieStudy->delete();
 
-        return redirect()->route('vacancie_studies.index');
+        return redirect()->route('vacancie_studies.index')->with('success', 'Estudio de vacante eliminado correctamente');
     }
 }

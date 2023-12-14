@@ -15,11 +15,6 @@ class Vacancie extends Model
         return $this->hasMany(applications::class, 'vacant_id', 'id');
     }
 
-    public function Vacancie_study()
-    {
-        return $this->hasMany(Vacancie_study::class, 'vacancie_id');
-    }
-
     public function charge() :BelongsTo {
         return $this->belongsTo(Charge::class);
     }
@@ -40,5 +35,13 @@ class Vacancie extends Model
         return $this->belongsTo(City::class);
     }
 
-    
+    public function studies()
+    {
+        return $this->hasMany(Vacancie_study::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

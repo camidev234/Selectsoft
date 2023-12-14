@@ -87,7 +87,7 @@ Route::get('/selector/home', [SelectorController::class, 'index'])->name('select
 
 
 Route::get('/recruiter/home', [RecruiterController::class, 'index'])->name('recruiter.index')->middleware('auth');
-Route::get('/recruiter', ['RecruiterController@index'])->name('recruiter.index');
+Route::get('/recruiter', [RecruiterController:: class, 'index'])->name('recruiter.index');
 Route::post('/createCompany', [CompanyController::class, 'store'])->name('company.store');
 Route::get('/companies/allCompanies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::get('/companies/findCompany', [CompanyController::class, 'findCompany'])->name('company.findCompany');
@@ -115,12 +115,14 @@ Route::delete('/occupationFunctions/delete/{occupation_function}/{occupation}', 
 Route::get('/vacancie/edit/{vacancie}/{company}', [VacancieController::class, 'edit'])->name('vacancies.edit')->middleware('auth');
 Route::patch('/vacancie/update/{vacancie}/{company}', [VacancieController::class, 'update'])->name('vacancies.update');
 
-Route::get('/vacancie_studies', [VacancieStudyController::class, 'index'])->name('vacancie_studies.index');
-Route::get('/vacancie_studies/create', [VacancieStudyController::class, 'create'])->name('vacancie_studies.create');
-Route::post('/vacancie_studies/store', [VacancieStudyController::class, 'store'])->name('vacancie_studies.store');
+Route::get('/vacancie_studies/index', [VacancieStudyController::class, 'index'])->name('vacancie_studies.index');
+Route::post('/vacancie_studies/store/{vacancie}', [VacancieStudyController::class, 'store'])->name('vacancie_studies.store');
 Route::get('/vacancie_studies/{vacancieStudy}/edit', [VacancieStudyController::class, 'edit'])->name('vacancie_studies.edit');
-Route::put('/vacancie_studies/{vacancieStudy}', [VacancieStudyController::class, 'update'])->name('vacancie_studies.update');
+Route::put('/vacancie_studies/{vacancie_studies}', [VacancieStudyController::class, 'update'])->name('vacancie_studies.update');
 Route::delete('/vacancie_studies/{vacancieStudy}', [VacancieStudyController::class, 'destroy'])->name('vacancie_studies.destroy');
+Route::get('/vacancie/studies/create/{vacancie}', [VacancieStudyController::class, 'create'])->name('vacancie_studies.create');
+Route::get('/vacancie_studies/show', [VacancieStudyController::class, 'show'])->name('vacancie_studies.show')->middleware('auth');
+
 
 Route::get('/requisitions/index', [RequisitionController::class, 'index'])->name('requisition.index');
 Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
