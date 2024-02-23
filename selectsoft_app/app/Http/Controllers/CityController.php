@@ -18,5 +18,17 @@ class CityController extends Controller
             'cities'=> $cities
         ], 200);
     }
+
+    public function store(Request $request):JsonResponse{
+        $city = new City();
+
+        $city->city_name = $request->city_name;
+        $city->departament_id = $request->departament_id;
+
+        $city->save();
+        return response()->json([
+            'message'=>"La ciudad se ha creado correctamente"
+        ], 201);
+    }
 }
  
