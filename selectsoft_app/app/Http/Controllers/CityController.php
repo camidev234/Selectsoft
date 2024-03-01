@@ -30,5 +30,12 @@ class CityController extends Controller
             'message'=>"La ciudad se ha creado correctamente"
         ], 201);
     }
+
+    public function getById($id) {
+        $city = City::where('id', $id)->first();
+        if (empty($city)) {
+            return response()->json([ 'message' => 'Ocupacion no encontrada' ], 404);
+        }
+        return response()->json($city, 200);
+    }
 }
- 
