@@ -15,7 +15,9 @@ class UserController extends Controller
     public function index():JsonResponse{
         $users = User::all();
         if ($users->isEmpty()) {
-            return response()->json(404);
+            return response()->json([
+                'message'=>"No se encontraron datos"
+            ], 404);
         }
         return response()->json([
             'users'=> $users
@@ -36,15 +38,15 @@ class UserController extends Controller
         $user->number_document = $request->number_document;
         $user->telephone = $request->telephone;
         $user->phone_number = $request->phone_number;
-        $user->adress = $request->adress;
+        $user->address = $request->address;
         $user->id_country = $request->id_country;
-        $user->id_departament = $request->id_departament;
+        $user->id_department = $request->id_department;
         $user->id_city = $request->id_city;
         $user->birthdate = $request->birthdate;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->role_id = $request->role_id;
-        
+
         $user->save();
         return response()->json([
             'message'=>"El usuario se ha creado correctamente"

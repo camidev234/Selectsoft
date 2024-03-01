@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\API\DepartamentController;
 use App\Http\Controllers\API\OccupationController as APIOccupationController;
@@ -28,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/cities', [CityController::class, 'index']);
-Route::post( '/city/store' ,[CityController::class,'store']) ; 
+Route::post( '/city/store' ,[CityController::class,'store']) ;  
 Route::get('/city/{id}', [CityController::class, 'getById']);
 
 Route::get('/users', [UserController::class, 'index']);
@@ -50,3 +51,7 @@ Route::get('country/{id}', [CountryController::class, 'getById']);
 Route::get('/departaments', [DepartamentController::class, 'index']);
 Route::post('/departament/store', [DepartamentController::class, 'store']);
 Route::get('/departament/{id}', [DepartamentController::class, 'getById']);
+
+Route::get('/companies', [CompanyController::class, 'index']);
+Route::post('/company/store', [CompanyController::class, 'store']);
+Route::get('/company/{id}', [CompanyController::class, 'getById']);
