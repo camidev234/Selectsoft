@@ -88,7 +88,7 @@ Route::get('/selector/home', [SelectorController::class, 'index'])->name('select
 
 Route::get('/recruiter/home', [RecruiterController::class, 'index'])->name('recruiter.index')->middleware('auth');
 Route::get('/recruiter', [RecruiterController:: class, 'index'])->name('recruiter.index');
-Route::post('/createCompany', [CompanyController::class, 'store'])->name('company.store');
+Route::get('/createCompany', [CompanyController::class, 'store'])->name('company.store');
 Route::get('/companies/allCompanies', [CompanyController::class, 'index'])->name('company.index')->middleware('auth');
 Route::get('/companies/findCompany', [CompanyController::class, 'findCompany'])->name('company.findCompany');
 Route::get('/recruiter/joinCompany/{company}', [RecruiterController::class, 'joinCompany'])->name('recruiter.joinCompany');
